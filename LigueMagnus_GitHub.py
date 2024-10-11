@@ -3,6 +3,12 @@ from bs4 import BeautifulSoup
 import re
 import pandas as pd
 import unicodedata
+import os
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 url = 'https://www.hockeyarchives.info/France2025Magnus.htm'
 
@@ -169,17 +175,29 @@ def create_dataframe(regular_season_data, playoffs_data):
 
     return matches_df, rankings_df
 
-# Main execution
-regular_season_data = scrape_ligue_magnus_data_regular_season(url)
-playoffs_data = scrape_ligue_magnus_data_playoffs(url)
+def main():
+    try:
+        logger.info("Starting data scraping process")
+        regular_season_data = scrape_ligue_magnus_data_regular_season(url)
+        playoffs_data = scrape_ligue_magnus_data_playoffs(url)
 
-matches_df, rankings_df = create_dataframe(regular_season_data, playoffs_data)
+        logger.info("Creating DataFrames")
+        matches_df, rankings_df = create_dataframe(regular_season_data, playoffs_data)
 
-print("Matches DataFrame:")
-print(matches_df)
-print("\nRankings DataFrame:")
-print(rankings_df)
+        logger.info("Saving DataFrames to CSV")
+        # Get the directory of the current script
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        # Save DataFrames to CSV in the same directory as the script
+        matches_csv_path = os.path.join(current_dir, 'ligue_magnus_matches.csv')
+        rankings_csv_path = os.path.join(current_dir, 'ligue_magnus_rankings.csv')
+        
+        matches_df.to_csv(matches_csv_path, index=False)
+        rankings_df.to_csv(rankings_csv_path, index=False)
 
-# Save DataFrames to CSV
-matches_df.to_csv('ligue_magnus_matches.csv', index=False)
-rankings_df.to_csv('ligue_magnus_rankings.csv', index=False)
+        logger.info(f"CSV files saved: {matches_csv_path}, {rankings_csv_path}")
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    main()
