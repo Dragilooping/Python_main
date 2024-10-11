@@ -19,7 +19,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests beautifulsoup4 pandas
     - name: Run script
-      run: python LigueMagnus_Github.py
+      run: python LigueMagnus_GitHub.py
     - name: Commit and push if changes
       run: |
         git config --global user.name 'GitHub Action'
