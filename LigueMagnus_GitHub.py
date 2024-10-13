@@ -66,8 +66,20 @@ def scrape_ligue_magnus_data_playoffs(url):
             current_element = current_element.find_next_sibling()
     return data
 
+# def clean_number(value):
+#     return re.sub(r'[^0-9]', '', value)
+
+# def clean_number(value):
+#     # Replace asterisks with blanks
+#     # value = value.replace('*', ' ')
+#     # Remove any remaining non-numeric characters
+#     return re.sub(r'[^0-9]', ' ', value)
+
 def clean_number(value):
-    return re.sub(r'[^0-9]', '', value)
+    # Find the first number in the string
+    match = re.search(r'\d+', value)
+    # If a number is found, return it as an integer, otherwise return 0
+    return int(match.group()) if match else 0
 
 def normalize_text(text):
     # Convert to NFD form and remove diacritics
@@ -152,7 +164,10 @@ def create_dataframe(regular_season_data, playoffs_data):
                         if len(parts) >= 3 and parts[0].isdigit():
                             rank = int(parts[0])
                             team = parts[1]
-                            points = int(clean_number(parts[2]))
+                            # Join all parts after the rank and team, then clean the number
+                            points_str = ' '.join(parts[2:])
+                            points = clean_number(points_str)
+                            # print(f"Team: {team}, Raw points: {points_str}, Cleaned points: {points}")  # Debug print
                             ranking_data.append({
                                 'Rank': rank,
                                 'Team': team,
