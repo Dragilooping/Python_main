@@ -66,14 +66,9 @@ def scrape_ligue_magnus_data_playoffs(url):
             current_element = current_element.find_next_sibling()
     return data
 
-# def clean_number(value):
-#     return re.sub(r'[^0-9]', '', value)
-
-# def clean_number(value):
-#     # Replace asterisks with blanks
-#     # value = value.replace('*', ' ')
-#     # Remove any remaining non-numeric characters
-#     return re.sub(r'[^0-9]', ' ', value)
+def extract_year_from_title(title):
+    year_match = re.search(r'\(.*?(\d{4})\)', title)
+    return year_match.group(1) if year_match else ""
 
 def clean_number(value):
     # Find the first number in the string
@@ -121,12 +116,17 @@ def create_dataframe(regular_season_data, playoffs_data):
             journee = journee_match.group(1) if journee_match else ""
             date_match = re.search(r'\((.*?)\)', title)
             default_date = normalize_text(date_match.group(1) if date_match else "")
+            year = extract_year_from_title(title)
 
             if "matches" in item:  # This is match data
                 for match in item['matches']:
                     match = normalize_text(match)
                     match_date = re.search(r'\[(.*?)\]', match)
                     date = match_date.group(1) if match_date else default_date
+
+                    # Append year to the date if it's not already there
+                    if year and year not in date:
+                        date = f"{date} {year}"
 
                     match = re.sub(r'\[.*?\]', '', match).strip()
 
@@ -164,10 +164,8 @@ def create_dataframe(regular_season_data, playoffs_data):
                         if len(parts) >= 3 and parts[0].isdigit():
                             rank = int(parts[0])
                             team = parts[1]
-                            # Join all parts after the rank and team, then clean the number
                             points_str = ' '.join(parts[2:])
                             points = clean_number(points_str)
-                            # print(f"Team: {team}, Raw points: {points_str}, Cleaned points: {points}")  # Debug print
                             ranking_data.append({
                                 'Rank': rank,
                                 'Team': team,
