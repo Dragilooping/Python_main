@@ -3,8 +3,8 @@ First Leg,1,vendredi 13 septembre 2024,Anglet - Amiens,Regular Time,1-5,no,Amien
 First Leg,1,vendredi 13 septembre 2024,Bordeaux - Marseille,Extra Time,3-2,no,Bordeaux
 First Leg,1,vendredi 13 septembre 2024,Nice - Chamonix,Regular Time,3-2,no,Nice
 First Leg,1,vendredi 13 septembre 2024,Briancon - Gap,Regular Time,5-1,no,Briancon
-First Leg,1,samedi 14 septembre,Cergy - Grenoble,Regular Time,2-7,no,Grenoble
-First Leg,1,dimanche 20 octobre,Rouen - Angers,,,yes,
+First Leg,1,samedi 14 septembre 2024,Cergy - Grenoble,Regular Time,2-7,no,Grenoble
+First Leg,1,dimanche 20 octobre 2024,Rouen - Angers,,,yes,
 First Leg,2,mardi 17 septembre 2024,Gap - Anglet,Regular Time,3-5,no,Anglet
 First Leg,2,mardi 17 septembre 2024,Chamonix - Briancon,Regular Time,4-0,no,Chamonix
 First Leg,2,mardi 17 septembre 2024,Grenoble - Nice,Extra Time,3-2,no,Grenoble
@@ -16,7 +16,7 @@ First Leg,3,vendredi 20 septembre 2024,Bordeaux - Amiens,Regular Time,3-1,no,Bor
 First Leg,3,vendredi 20 septembre 2024,Cergy - Angers,Regular Time,3-4,no,Angers
 First Leg,3,vendredi 20 septembre 2024,Nice - Marseille,Regular Time,2-3,no,Marseille
 First Leg,3,vendredi 20 septembre 2024,Gap - Chamonix,Extra Time,5-6,no,Chamonix
-First Leg,3,panne des groupes froid de la patinoire,Briancon - Grenoble : reporte,,,yes,
+First Leg,3,panne des groupes froid de la patinoire 2024,Briancon - Grenoble : reporte,,,yes,
 First Leg,4,mardi 24 septembre 2024,Chamonix - Anglet,Extra Time,3-4,no,Anglet
 First Leg,4,mardi 24 septembre 2024,Grenoble - Gap,Regular Time,7-0,no,Grenoble
 First Leg,4,mardi 24 septembre 2024,Marseille - Briancon,Regular Time,5-2,no,Marseille
@@ -28,8 +28,8 @@ First Leg,5,vendredi 27 septembre 2024,Cergy - Rouen,Regular Time,4-3,no,Cergy
 First Leg,5,vendredi 27 septembre 2024,Nice - Amiens,Extra Time,2-3,no,Amiens
 First Leg,5,vendredi 27 septembre 2024,Gap - Marseille,Regular Time,7-3,no,Gap
 First Leg,5,vendredi 27 septembre 2024,Chamonix - Grenoble,Extra Time,5-4,no,Chamonix
-First Leg,5,dimanche 29 septembre,Angers - Briancon,Regular Time,5-2,no,Angers
-First Leg,6,dimanche 22 septembre,Rouen - Nice,Regular Time,3-1,no,Rouen
+First Leg,5,dimanche 29 septembre 2024,Angers - Briancon,Regular Time,5-2,no,Angers
+First Leg,6,dimanche 22 septembre 2024,Rouen - Nice,Regular Time,3-1,no,Rouen
 First Leg,6,mardi 1er octobre 2024,Grenoble - Anglet,Regular Time,3-0,no,Grenoble
 First Leg,6,mardi 1er octobre 2024,Marseille - Chamonix,Regular Time,1-0,no,Marseille
 First Leg,6,mardi 1er octobre 2024,Angers - Gap,Regular Time,8-3,no,Angers
@@ -40,25 +40,25 @@ First Leg,7,vendredi 4 octobre 2024,Nice - Bordeaux,Regular Time,1-7,no,Bordeaux
 First Leg,7,vendredi 4 octobre 2024,Gap - Amiens,Extra Time,3-4,no,Amiens
 First Leg,7,vendredi 4 octobre 2024,Chamonix - Angers,Regular Time,1-2,no,Angers
 First Leg,7,vendredi 4 octobre 2024,Grenoble - Marseille,Regular Time,7-2,no,Grenoble
-First Leg,7,panne des groupes froid de la patinoire,Briancon - Rouen : reporte,,,yes,
+First Leg,7,panne des groupes froid de la patinoire 2024,Briancon - Rouen : reporte,,,yes,
 First Leg,8,mardi 8 octobre 2024,Marseille - Anglet,Regular Time,5-3,no,Marseille
 First Leg,8,mardi 8 octobre 2024,Angers - Grenoble,Regular Time,5-1,no,Angers
 First Leg,8,mardi 8 octobre 2024,Amiens - Chamonix,Extra Time,3-2,no,Amiens
 First Leg,8,mardi 8 octobre 2024,Cergy - Nice,Regular Time,4-1,no,Cergy
-First Leg,8,dimanche 13 octobre,Rouen - Gap,Regular Time,10-5,no,Rouen
-First Leg,8,dimanche 20 octobre,Bordeaux - Briancon,,,yes,
+First Leg,8,dimanche 13 octobre 2024,Rouen - Gap,Regular Time,10-5,no,Rouen
+First Leg,8,dimanche 20 octobre 2024,Bordeaux - Briancon,,,yes,
 First Leg,9,vendredi 11 octobre 2024,Anglet - Nice,Regular Time,1-2,no,Nice
 First Leg,9,vendredi 11 octobre 2024,Gap - Bordeaux,Regular Time,1-5,no,Bordeaux
 First Leg,9,vendredi 11 octobre 2024,Grenoble - Amiens,Regular Time,5-0,no,Grenoble
 First Leg,9,vendredi 11 octobre 2024,Marseille - Angers,Regular Time,3-1,no,Marseille
-First Leg,9,reporte,Briancon - Cergy,,,yes,
-First Leg,9,dimanche 19 janvier 2025,Chamonix - Rouen,,,yes,
+First Leg,9,reporte 2024,Briancon - Cergy,,,yes,
+First Leg,9,dimanche 19 janvier 2025 2024,Chamonix - Rouen,,,yes,
 First Leg,10,mardi 15 octobre 2024,Angers - Anglet,,,yes,
 First Leg,10,mardi 15 octobre 2024,Amiens - Marseille,,,yes,
 First Leg,10,mardi 15 octobre 2024,Bordeaux - Chamonix,,,yes,
 First Leg,10,mardi 15 octobre 2024,Cergy - Gap,,,yes,
-First Leg,10,dimanche 27 octobre,Nice - Briancon,,,yes,
-First Leg,10,mardi 3 decembre,Rouen - Grenoble,,,yes,
+First Leg,10,dimanche 27 octobre 2024,Nice - Briancon,,,yes,
+First Leg,10,mardi 3 decembre 2024,Rouen - Grenoble,,,yes,
 First Leg,11,vendredi 18 octobre 2024,Anglet - Briancon,,,yes,
 First Leg,11,vendredi 18 octobre 2024,Gap - Nice,,,yes,
 First Leg,11,vendredi 18 octobre 2024,Chamonix - Cergy,,,yes,
@@ -76,14 +76,14 @@ First Leg,13,mardi 29 octobre 2024,Amiens - Bordeaux,,,yes,
 First Leg,13,mardi 29 octobre 2024,Marseille - Nice,,,yes,
 First Leg,13,mardi 29 octobre 2024,Grenoble - Briancon,,,yes,
 First Leg,13,mardi 29 octobre 2024,Chamonix - Gap,,,yes,
-First Leg,13,mardi 12 novembre,Angers - Cergy,,,yes,
+First Leg,13,mardi 12 novembre 2024,Angers - Cergy,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Anglet - Chamonix,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Gap - Grenoble,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Briancon - Marseille,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Nice - Angers,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Cergy - Amiens,,,yes,
 First Leg,14,vendredi 1er novembre 2024,Bordeaux - Rouen,,,yes,
-First Leg,15,dimanche 27 octobre,Grenoble - Chamonix,,,yes,
+First Leg,15,dimanche 27 octobre 2024,Grenoble - Chamonix,,,yes,
 First Leg,15,dimanche 3 novembre 2024,Briancon - Angers : reporte,,,yes,
 First Leg,15,dimanche 3 novembre 2024,Bordeaux - Anglet,,,yes,
 First Leg,15,dimanche 3 novembre 2024,Rouen - Cergy,,,yes,
@@ -131,24 +131,24 @@ First Leg,22,vendredi 29 novembre 2024,Marseille - Bordeaux,,,yes,
 First Leg,22,vendredi 29 novembre 2024,Grenoble - Cergy,,,yes,
 First Leg,22,vendredi 29 novembre 2024,Chamonix - Nice,,,yes,
 First Leg,22,vendredi 29 novembre 2024,Gap - Briancon,,,yes,
-Second Leg,23,dimanche 6 octobre,Nice - Rouen,Regular Time,2-0,no,Nice
-Second Leg,23,dimanche 1er decembre,Briancon - Bordeaux,,,yes,
+Second Leg,23,dimanche 6 octobre 2024,Nice - Rouen,Regular Time,2-0,no,Nice
+Second Leg,23,dimanche 1er decembre 2024,Briancon - Bordeaux,,,yes,
 Second Leg,23,mardi 3 decembre 2024,Anglet - Amiens,,,yes,
 Second Leg,23,mardi 3 decembre 2024,Gap - Marseille,,,yes,
 Second Leg,23,mardi 3 decembre 2024,Chamonix - Angers,,,yes,
-Second Leg,23,dimanche 15 decembre,Grenoble - Cergy,,,yes,
+Second Leg,23,dimanche 15 decembre 2024,Grenoble - Cergy,,,yes,
 Second Leg,24,vendredi 6 decembre 2024,Angers - Grenoble,,,yes,
 Second Leg,24,vendredi 6 decembre 2024,Marseille - Chamonix,,,yes,
 Second Leg,24,vendredi 6 decembre 2024,Bordeaux - Anglet,,,yes,
 Second Leg,24,vendredi 6 decembre 2024,Rouen - Briancon,,,yes,
 Second Leg,24,vendredi 6 decembre 2024,Cergy - Nice,,,yes,
-Second Leg,24,dimanche 12 janvier 2025,Amiens - Gap,,,yes,
+Second Leg,24,dimanche 12 janvier 2025 2024,Amiens - Gap,,,yes,
 Second Leg,25,dimanche 8 decembre 2024,Grenoble - Nice,,,yes,
 Second Leg,25,dimanche 8 decembre 2024,Briancon - Cergy,,,yes,
 Second Leg,25,dimanche 8 decembre 2024,Anglet - Rouen,,,yes,
 Second Leg,25,dimanche 8 decembre 2024,Gap - Bordeaux,,,yes,
 Second Leg,25,dimanche 8 decembre 2024,Angers - Marseille,,,yes,
-Second Leg,25,dimanche 5 janvier 2025,Chamonix - Amiens,,,yes,
+Second Leg,25,dimanche 5 janvier 2025 2024,Chamonix - Amiens,,,yes,
 Second Leg,26,mardi 10 decembre 2024,Marseille - Grenoble,,,yes,
 Second Leg,26,mardi 10 decembre 2024,Amiens - Angers,,,yes,
 Second Leg,26,mardi 10 decembre 2024,Bordeaux - Chamonix,,,yes,
