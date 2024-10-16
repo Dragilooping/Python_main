@@ -70,6 +70,26 @@ def extract_year_from_title(title):
     year_match = re.search(r'\(.*?(\d{4})\)', title)
     return year_match.group(1) if year_match else ""
 
+def replace_first_occurrence(date_str):
+    # Replace '1er' with '1'
+    return re.sub(r'\b1er\b', '1', date_str)
+
+
+def maintain_appending(date_str, match, year):
+    # Remove any square brackets from the date string
+    date_str = re.sub(r'[\[\]]', '', date_str).strip()
+
+    # Check if the date already contains a year
+    if re.search(r'\b\d{4}\b', date_str):
+        return date_str
+
+    # If the match contains square brackets, it's a replaced date
+    if '[' in match and ']' in match:
+        return date_str + f' {year}'
+
+    # For other cases, return the date as is
+    return date_str
+
 def clean_number(value):
     # Find the first number in the string
     match = re.search(r'\d+', value)
@@ -120,13 +140,16 @@ def create_dataframe(regular_season_data, playoffs_data):
 
             if "matches" in item:  # This is match data
                 for match in item['matches']:
+                    original_match = match  # Store the original match string
                     match = normalize_text(match)
                     match_date = re.search(r'\[(.*?)\]', match)
                     date = match_date.group(1) if match_date else default_date
 
-                    # Append year to the date if it's not already there
-                    if year and year not in date:
-                        date = f"{date} {year}"
+                    # Replace '1er' with '1'
+                    date = replace_first_occurrence(date)
+
+                    # Append year to the date if necessary
+                    date = maintain_appending(date, original_match, year)
 
                     match = re.sub(r'\[.*?\]', '', match).strip()
 
