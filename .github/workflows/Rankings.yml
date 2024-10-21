@@ -1,4 +1,4 @@
-name: Run LigueMagnus Scripts
+name: Run LigueMagnus Rankings Script
 
 on:
   schedule:
@@ -6,35 +6,27 @@ on:
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  run-scripts:
+  run-rankings-script:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install selenium webdriver_manager
-    
     - name: Install Chrome
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
-    
     - name: Run Rankings script
       run: python LigueMagnus_Rankings_Selenium.py
-    
-    - name: Run Matches script
-      run: python LigueMagnus_Matches_Selenium.py
-    
     - name: Commit and push if changes
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add .
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update CSV files" && git push)
+        git add ligue_magnus_rankings.csv
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update rankings CSV file" && git push)
