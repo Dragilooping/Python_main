@@ -78,19 +78,21 @@ try:
             current_date = element.text
         elif "row" in element.get_attribute("class") and "header-tab" not in element.get_attribute("class"):
             match_data = element.text.split('\n')
-            if len(match_data) >= 3:  # Changed from 5 to 3
+            if len(match_data) >= 4:  # We need at least 4 elements: Journee, Home team, Time/Score, Away team
                 journee = match_data[0].replace('J', '')
-                logger.info(f"Processing match: Journee {journee}")
-                if len(match_data) >= 5:
-                    home_team, away_team = match_data[1], match_data[3]
-                    score_text = match_data[2]
-                else:
-                    logger.info(f"Incomplete match data: {match_data}")
-                    home_team, away_team = match_data[1], "Unknown"
-                    score_text = "vs" if len(match_data) > 2 else ""
+                home_team = match_data[1]
+                score_or_time = match_data[2]
+                away_team = match_data[3]
                 
-                score = extract_score(score_text)
-            
+                logger.info(f"Processing match: Journee {journee}")
+                logger.info(f"Match data: {match_data}")
+                
+                score = extract_score(score_or_time)
+                if not score:
+                    score_text = "vs"
+                else:
+                    score_text = score_or_time
+                
                 match = {
                     'leg': determine_leg(journee),
                     'journee': journee,
@@ -104,9 +106,9 @@ try:
                 matches.append(match)
                 logger.info(f"Match processed: {match}")
             else:
-                logger.info(f"Row skipped: insufficient data ({len(match_data)} < 3)")
-            
-                logger.info(f"Number of matches processed: {len(matches)}")
+                logger.info(f"Row skipped: insufficient data ({len(match_data)} < 4)")
+    
+    logger.info(f"Number of matches processed: {len(matches)}")
 
     with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['leg', 'journee', 'date', 'match', 'win_type', 'score', 'available', 'winner']
