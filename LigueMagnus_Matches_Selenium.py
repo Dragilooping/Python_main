@@ -10,6 +10,7 @@ import logging
 import csv
 from datetime import datetime
 import re
+import time
 
 def determine_leg(journee):
     return "First Leg" if int(journee) <= 22 else "Second Leg"
@@ -112,5 +113,8 @@ with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvf
         writer.writerow(match)
 
 #print("CSV file 'ligue_magnus_matches.csv' has been created.")
+
+# Keep the browser open for 30 seconds
+time.sleep(30)
 
 driver.quit()
