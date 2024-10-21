@@ -41,10 +41,16 @@ def scrape_standings(driver, wait):
 standings_url = "https://liguemagnus.com/saison-reguliere/classement/?phase=432"
 path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
 service = Service(executable_path=path)
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(service=service, options=chrome_options)
 
+# Set up Chrome options for headless execution
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+# Set up webdriver using webdriver_manager
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
 wait = WebDriverWait(driver, 20)
 
 # Scrape standings data
