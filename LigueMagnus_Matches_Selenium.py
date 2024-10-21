@@ -45,8 +45,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 web = "https://liguemagnus.com/calendrier-resultats/?journee=&equipe=&poule=432&date_debut=&date_fin=2025-02-21"
-path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
-service = Service(executable_path=path)
 
 # Set up Chrome options for headless execution
 chrome_options = Options()
@@ -61,22 +59,32 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 driver.get(web)
 logger.info(f"Current URL: {driver.current_url}")
 
-wait = WebDriverWait(driver, 20)
+wait = WebDriverWait(driver, 60)  # Increase wait time to 60 seconds
 calendrier_div = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "calendrier-general-compet")))
-header_tab = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".calendrier-general-compet .row.header-tab")))
-print("Header tab found:", header_tab.text)
+wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".calendrier-general-compet .cal-date")))
+
+# Scroll the page
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+time.sleep(5)  # Wait for content to load after scrolling
+
 # Find all elements (dates and rows) using CSS selectors
 all_elements = calendrier_div.find_elements(By.CSS_SELECTOR, ".cal-date, .row")
 
-# current_date = ""
-# for element in all_elements:
-#     if "cal-date" in element.get_attribute("class"):
-#         current_date = element.text
-#         print(f"\nDate: {current_date}")
-#     elif "header-tab" in element.get_attribute("class"):
-#         print(f"Header: {element.text}")
-#     elif "row" in element.get_attribute("class"):
-#         print(f"Match: {element.text}")
+logger.info(f"Number of elements found: {len(all_elements)}")
+for element in all_elements:
+    logger.info(f"Element class: {element.get_attribute('class')}, text: {element.text[:50]}...")
+
+# Use JavaScript to get content
+all_content = driver.execute_script("""
+    var div = document.querySelector('.calendrier-general-compet');
+    return div.innerHTML;
+""")
+logger.info(f"Content retrieved via JavaScript: {all_content[:500]}...")  # Log first 500 characters
+
+# Check for iframes
+iframes = driver.find_elements(By.TAG_NAME, "iframe")
+for iframe in iframes:
+    logger.info(f"iframe src: {iframe.get_attribute('src')}")
 
 matches = []
 current_date = ""
@@ -112,11 +120,6 @@ with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvf
     for match in matches:
         writer.writerow(match)
 
-print("CSV file 'ligue_magnus_matches.csv' has been created.")
-
-# Keep the browser open for 30 seconds
-import time
-
-time.sleep(30)
+logger.info(f"CSV file 'ligue_magnus_matches.csv' has been created with {len(matches)} matches.")
 
 driver.quit()
