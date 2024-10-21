@@ -47,11 +47,17 @@ web = "https://liguemagnus.com/calendrier-resultats/?journee=&equipe=&poule=432&
 path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
 service = Service(executable_path=path)
 chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+# Set up webdriver using webdriver_manager
+service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
+wait = WebDriverWait(driver, 20)
 
 driver.get(web)
-logger.info(f"Current URL: {driver.current_url}")
+logger.info(f"Scraping standings data from: {web}")
 
 wait = WebDriverWait(driver, 20)
 calendrier_div = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "calendrier-general-compet")))
@@ -104,11 +110,6 @@ with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvf
     for match in matches:
         writer.writerow(match)
 
-print("CSV file 'ligue_magnus_matches.csv' has been created.")
-
-# Keep the browser open for 30 seconds
-import time
-
-time.sleep(30)
+#print("CSV file 'ligue_magnus_matches.csv' has been created.")
 
 driver.quit()
