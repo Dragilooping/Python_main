@@ -10,6 +10,7 @@ import logging
 import csv
 from datetime import datetime
 import re
+import time
 
 def determine_leg(journee):
     return "First Leg" if int(journee) <= 22 else "Second Leg"
