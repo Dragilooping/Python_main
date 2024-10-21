@@ -46,75 +46,75 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 web = "https://liguemagnus.com/calendrier-resultats/?journee=&equipe=&poule=432&date_debut=&date_fin=2025-02-21"
-path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
-service = Service(executable_path=path)
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
 
-# Set up webdriver using webdriver_manager
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=chrome_options)
-wait = WebDriverWait(driver, 20)
+try:
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
-driver.get(web)
-logger.info(f"Scraping standings data from: {web}")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    wait = WebDriverWait(driver, 20)
 
-wait = WebDriverWait(driver, 20)
-calendrier_div = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "calendrier-general-compet")))
-header_tab = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".calendrier-general-compet .row.header-tab")))
-print("Header tab found:", header_tab.text)
-# Find all elements (dates and rows) using CSS selectors
-all_elements = calendrier_div.find_elements(By.CSS_SELECTOR, ".cal-date, .row")
+    driver.get(web)
+    logger.info(f"Scraping standings data from: {web}")
 
-# current_date = ""
-# for element in all_elements:
-#     if "cal-date" in element.get_attribute("class"):
-#         current_date = element.text
-#         print(f"\nDate: {current_date}")
-#     elif "header-tab" in element.get_attribute("class"):
-#         print(f"Header: {element.text}")
-#     elif "row" in element.get_attribute("class"):
-#         print(f"Match: {element.text}")
+    calendrier_div = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "calendrier-general-compet")))
+    header_tab = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".calendrier-general-compet .row.header-tab")))
+    logger.info(f"Header tab found: {header_tab.text}")
 
-matches = []
-current_date = ""
+    all_elements = calendrier_div.find_elements(By.CSS_SELECTOR, ".cal-date, .row")
+    logger.info(f"Number of elements found: {len(all_elements)}")
 
-for element in all_elements:
-    if "cal-date" in element.get_attribute("class"):
-        current_date = element.text
-    elif "row" in element.get_attribute("class") and not "header-tab" in element.get_attribute("class"):
-        match_data = element.text.split('\n')
-        if len(match_data) >= 5:
-            journee = match_data[0].replace('J', '')
-            home_team, away_team = match_data[1], match_data[3]
-            score_text = match_data[2]
-            score = extract_score(score_text)
+    for index, element in enumerate(all_elements):
+        logger.info(f"Element {index}: Class: {element.get_attribute('class')}, Text: {element.text[:50]}...")
 
-            matches.append({
-                'leg': determine_leg(journee),
-                'journee': journee,
-                'date': current_date,
-                'match': f"{home_team} - {away_team}",
-                'win_type': determine_win_type(score_text),
-                'score': score,
-                'available': is_available(score),
-                'winner': determine_winner(home_team, away_team, score)
-            })
+    matches = []
+    current_date = ""
 
-# Write to CSV file
-with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvfile:
-    fieldnames = ['leg', 'journee', 'date', 'match', 'win_type', 'score', 'available', 'winner']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    for element in all_elements:
+        if "cal-date" in element.get_attribute("class"):
+            current_date = element.text
+        elif "row" in element.get_attribute("class") and "header-tab" not in element.get_attribute("class"):
+            match_data = element.text.split('\n')
+            if len(match_data) >= 5:
+                journee = match_data[0].replace('J', '')
+                home_team, away_team = match_data[1], match_data[3]
+                score_text = match_data[2]
+                score = extract_score(score_text)
 
-    writer.writeheader()
-    for match in matches:
-        writer.writerow(match)
+                match = {
+                    'leg': determine_leg(journee),
+                    'journee': journee,
+                    'date': current_date,
+                    'match': f"{home_team} - {away_team}",
+                    'win_type': determine_win_type(score_text),
+                    'score': score,
+                    'available': is_available(score),
+                    'winner': determine_winner(home_team, away_team, score)
+                }
+                matches.append(match)
+                logger.info(f"Match processed: {match}")
 
-#print("CSV file 'ligue_magnus_matches.csv' has been created.")
+    logger.info(f"Number of matches processed: {len(matches)}")
 
-# Keep the browser open for 30 seconds
-time.sleep(30)
+    with open('ligue_magnus_matches.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['leg', 'journee', 'date', 'match', 'win_type', 'score', 'available', 'winner']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for match in matches:
+            writer.writerow(match)
 
-driver.quit()
+    logger.info("CSV file 'ligue_magnus_matches.csv' has been created.")
+
+except Exception as e:
+    logger.error(f"An error occurred: {str(e)}")
+    logger.error(traceback.format_exc())
+    if 'driver' in locals():
+        logger.warning("Page source:")
+        logger.warning(driver.page_source)
+
+finally:
+    if 'driver' in locals():
+        driver.quit()
