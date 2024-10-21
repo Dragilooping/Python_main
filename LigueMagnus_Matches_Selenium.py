@@ -46,8 +46,15 @@ logger = logging.getLogger(__name__)
 web = "https://liguemagnus.com/calendrier-resultats/?journee=&equipe=&poule=432&date_debut=&date_fin=2025-02-21"
 path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
 service = Service(executable_path=path)
+
+# Set up Chrome options for headless execution
 chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+# Set up webdriver using webdriver_manager
+service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 driver.get(web)
