@@ -9,17 +9,29 @@ from webdriver_manager.chrome import ChromeDriverManager
 import logging
 import csv
 from datetime import datetime
-from babel.dates import format_date
-import locale
 import re
 import time
 
-# Set locale to French
-try:
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-except locale.Error:
-    locale.setlocale(locale.LC_TIME, 'fr_FR')
+MONTH_TRANSLATIONS = {
+    'January': 'janvier', 'February': 'février', 'March': 'mars', 'April': 'avril',
+    'May': 'mai', 'June': 'juin', 'July': 'juillet', 'August': 'août',
+    'September': 'septembre', 'October': 'octobre', 'November': 'novembre', 'December': 'décembre'
+}
 
+def convert_date_format(date_string):
+    try:
+        # Parse the English date
+        date_obj = datetime.strptime(date_string, "%B %d, %Y")
+        # Format the date in French
+        day = date_obj.day
+        month = MONTH_TRANSLATIONS[date_obj.strftime('%B')]
+        year = date_obj.year
+        french_date = f"{day} {month} {year}"
+        return french_date
+    except ValueError:
+        # If parsing fails, return the original string
+        return date_string
+        
 def convert_date_format(date_string):
     try:
         date_obj = datetime.strptime(date_string, "%B %d, %Y")
