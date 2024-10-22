@@ -9,9 +9,25 @@ from webdriver_manager.chrome import ChromeDriverManager
 import logging
 import csv
 from datetime import datetime
+from babel.dates import format_date
+import locale
 import re
 import time
 
+# Set locale to French
+try:
+    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+except locale.Error:
+    locale.setlocale(locale.LC_TIME, 'fr_FR')
+
+def convert_date_format(date_string):
+    try:
+        date_obj = datetime.strptime(date_string, "%B %d, %Y")
+        french_date = format_date(date_obj, format='d MMMM yyyy', locale='fr_FR')
+        return french_date
+    except ValueError:
+        return date_string
+        
 def determine_leg(journee):
     return "First Leg" if int(journee) <= 22 else "Second Leg"
 
@@ -76,6 +92,7 @@ try:
     for element in all_elements:
         if "cal-date" in element.get_attribute("class"):
             current_date = element.text
+            current_date = convert_date_format(current_date)
         elif "row" in element.get_attribute("class") and "header-tab" not in element.get_attribute("class"):
             match_data = element.text.split('\n')
             if len(match_data) >= 4:  # We need at least 4 elements: Journee, Home team, Time/Score, Away team
