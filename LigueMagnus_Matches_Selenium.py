@@ -11,6 +11,7 @@ import csv
 from datetime import datetime
 import re
 import time
+import traceback
 
 MONTH_TRANSLATIONS = {
     'January': 'janvier', 'February': 'février', 'March': 'mars', 'April': 'avril',
@@ -74,7 +75,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 web = "https://liguemagnus.com/calendrier-resultats/?journee=&equipe=&poule=432&date_debut=&date_fin=2025-02-21"
-
+driver = None
 try:
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -151,10 +152,10 @@ try:
 except Exception as e:
     logger.error(f"An error occurred: {str(e)}")
     logger.error(traceback.format_exc())
-    if 'driver' in locals():
+    if driver:
         logger.warning("Page source:")
         logger.warning(driver.page_source)
 
 finally:
-    if 'driver' in locals():
+    if driver:
         driver.quit()
