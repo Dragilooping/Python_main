@@ -12,7 +12,6 @@ from datetime import datetime, timedelta
 import re
 import time
 import traceback
-from zoneinfo import ZoneInfo
 
 MONTH_TRANSLATIONS = {
     'January': 'janvier', 'February': 'février', 'March': 'mars', 'April': 'avril',
@@ -22,18 +21,10 @@ MONTH_TRANSLATIONS = {
 
 def convert_date_format(date_string):
     try:
-        # Parse the English date
         date_obj = datetime.strptime(date_string, "%B %d, %Y")
-        # Adjust for time zone if necessary
-        date_obj = date_obj.replace(tzinfo=ZoneInfo("Europe/Paris"))
-        # Format the date in French
-        day = date_obj.day
-        month = MONTH_TRANSLATIONS[date_obj.strftime('%B')]
-        year = date_obj.year
-        french_date = f"{day} {month} {year}"
+        french_date = format_date(date_obj, format='d MMMM yyyy', locale='fr_FR')
         return french_date
     except ValueError:
-        # If parsing fails, return the original string
         return date_string
         
 def determine_leg(journee):
