@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import logging
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 import time
 import traceback
