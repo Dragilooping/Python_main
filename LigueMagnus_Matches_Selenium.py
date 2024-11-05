@@ -33,14 +33,6 @@ def convert_date_format(date_string):
         # If parsing fails, return the original string
         return date_string
         
-def convert_date_format(date_string):
-    try:
-        date_obj = datetime.strptime(date_string, "%B %d, %Y")
-        french_date = format_date(date_obj, format='d MMMM yyyy', locale='fr_FR')
-        return french_date
-    except ValueError:
-        return date_string
-        
 def determine_leg(journee):
     return "First Leg" if int(journee) <= 22 else "Second Leg"
 
