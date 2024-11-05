@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import logging
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime
 import re
 import time
 import traceback
@@ -23,7 +23,6 @@ def convert_date_format(date_string):
     try:
         # Parse the English date
         date_obj = datetime.strptime(date_string, "%B %d, %Y")
-        #date_obj += timedelta(days=1)
         # Format the date in French
         day = date_obj.day
         month = MONTH_TRANSLATIONS[date_obj.strftime('%B')]
