@@ -21,10 +21,17 @@ MONTH_TRANSLATIONS = {
 
 def convert_date_format(date_string):
     try:
+        # Parse the English date
         date_obj = datetime.strptime(date_string, "%B %d, %Y")
-        french_date = format_date(date_obj, format='d MMMM yyyy', locale='fr_FR')
+        date_obj += timedelta(days=1)
+        # Format the date in French
+        day = date_obj.day
+        month = MONTH_TRANSLATIONS[date_obj.strftime('%B')]
+        year = date_obj.year
+        french_date = f"{day} {month} {year}"
         return french_date
     except ValueError:
+        # If parsing fails, return the original string
         return date_string
         
 def determine_leg(journee):
