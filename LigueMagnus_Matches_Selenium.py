@@ -23,9 +23,9 @@ def convert_date_format(date_string):
     try:
         # Parse the English date
         date_obj = datetime.strptime(date_string, "%B %d, %Y")
+        date_obj += timedelta(days=1)
         # Format the date in French
         day = date_obj.day
-        date_obj += timedelta(days=1)
         month = MONTH_TRANSLATIONS[date_obj.strftime('%B')]
         year = date_obj.year
         french_date = f"{day} {month} {year}"
