@@ -34,6 +34,13 @@ def convert_date_format(date_string):
         # If parsing fails, return the original string
         return date_string
         
+def replace_team_names(team_name):
+    replacements = {
+        "BRIANÇON": "BRIANCON",
+        "CERGY-PONTOISE": "CERGY"
+    }
+    return replacements.get(team_name, team_name)
+    
 def determine_leg(journee):
     return "First Leg" if int(journee) <= 22 else "Second Leg"
 
@@ -59,9 +66,9 @@ def determine_winner(home_team, away_team, score):
         return ""
     home_score, away_team_score = map(int, scores)
     if home_score > away_team_score:
-        return home_team
+        return replace_team_names(home_team)
     elif away_team_score > home_score:
-        return away_team
+        return replace_team_names(away_team)
     return "Draw"
 
 logging.basicConfig(level=logging.INFO)
@@ -103,9 +110,9 @@ try:
             match_data = element.text.split('\n')
             if len(match_data) >= 4:  # We need at least 4 elements: Journee, Home team, Time/Score, Away team
                 journee = match_data[0].replace('J', '')
-                home_team = match_data[1]
+                home_team = replace_team_names(match_data[1])
                 score_or_time = match_data[2]
-                away_team = match_data[3]
+                away_team = replace_team_names(match_data[3])
                 
                 logger.info(f"Processing match: Journee {journee}")
                 logger.info(f"Match data: {match_data}")
