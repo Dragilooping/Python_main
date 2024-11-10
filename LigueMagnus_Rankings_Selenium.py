@@ -12,6 +12,12 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def replace_team_names(team_name):
+    replacements = {
+        "BRIANÇON": "BRIANCON",
+        "CERGY-PONTOISE": "CERGY"
+    }
+    return replacements.get(team_name, team_name)
 
 def scrape_standings(driver, wait):
     standings_div = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "clearfix")))
@@ -23,7 +29,7 @@ def scrape_standings(driver, wait):
         if len(cols) >= 10:
             standings.append({
                 'rank': cols[0].text,
-                'team': cols[1].text,
+                'team': replace_team_names(cols[1].text),
                 'points': cols[3].text,
                 'games_played': cols[4].text,
                 'wins': cols[5].text,
@@ -36,7 +42,6 @@ def scrape_standings(driver, wait):
             })
 
     return standings
-
 
 # Set up webdriver
 standings_url = "https://liguemagnus.com/saison-reguliere/classement/?phase=432"
@@ -68,7 +73,7 @@ with open('ligue_magnus_rankings.csv', 'w', newline='', encoding='utf-8') as csv
     for team in standings:
         writer.writerow(team)
 
-logger.info("Standings data has been written to 'ligue_magnus_standings.csv'")
+logger.info("Standings data has been written to 'ligue_magnus_rankings.csv'")
 
 # Keep the browser open for 30 seconds
 time.sleep(30)
