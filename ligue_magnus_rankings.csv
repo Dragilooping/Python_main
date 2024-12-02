@@ -1,7 +1,7 @@
 rank,team,points,games_played,wins,overtime_wins,overtime_losses,losses,goals_for,goals_againts,penalty_minutes
 1,GRENOBLE,55,21,17,1,2,1,106,42,188
 2,ANGERS,47,21,15,1,0,5,82,51,139
-3,BORDEAUX,41,22,11,3,2,6,80,51,161
+3,BORDEAUX,44,23,12,3,2,6,82,52,171
 4,AMIENS,39,22,10,4,1,7,74,72,293
 5,MARSEILLE,35,22,9,3,2,8,70,68,138
 6,ROUEN,34,21,10,1,2,8,88,71,142
@@ -10,4 +10,4 @@ rank,team,points,games_played,wins,overtime_wins,overtime_losses,losses,goals_fo
 9,CHAMONIX,25,21,4,5,3,9,55,64,148
 10,ANGLET,19,22,3,4,2,13,56,91,144
 11,GAP,17,21,3,2,4,12,59,107,137
-12,BRIANCON,15,19,4,0,3,12,44,74,212
+12,BRIANCON,15,20,4,0,3,13,45,76,220
