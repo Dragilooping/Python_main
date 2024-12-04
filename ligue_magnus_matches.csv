@@ -131,10 +131,10 @@ First Leg,22,29 novembre 2024,MARSEILLE - BORDEAUX,Regular Time,2-1,no,MARSEILLE
 First Leg,22,29 novembre 2024,ANGERS - ROUEN,Regular Time,0-3,no,ROUEN
 Second Leg,23,1 décembre 2024,BRIANCON - BORDEAUX,Regular Time,1-2,no,BORDEAUX
 Second Leg,35,1 décembre 2024,NICE - GRENOBLE,,,yes,
-First Leg,10,3 décembre 2024,ROUEN - GRENOBLE,,,yes,
-Second Leg,23,3 décembre 2024,GAP - MARSEILLE,,,yes,
-Second Leg,23,3 décembre 2024,CHAMONIX - ANGERS,,,yes,
-Second Leg,23,3 décembre 2024,ANGLET - AMIENS,,,yes,
+First Leg,10,3 décembre 2024,ROUEN - GRENOBLE,Regular Time,3-5,no,GRENOBLE
+Second Leg,23,3 décembre 2024,GAP - MARSEILLE,Extra Time,4-3,no,GAP
+Second Leg,23,3 décembre 2024,CHAMONIX - ANGERS,Extra Time,3-4,no,ANGERS
+Second Leg,23,3 décembre 2024,ANGLET - AMIENS,Regular Time,4-0,no,ANGLET
 Second Leg,24,6 décembre 2024,ROUEN - BRIANCON,,,yes,
 Second Leg,24,6 décembre 2024,BORDEAUX - ANGLET,,,yes,
 Second Leg,24,6 décembre 2024,MARSEILLE - CHAMONIX,,,yes,
