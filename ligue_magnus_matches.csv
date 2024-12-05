@@ -116,7 +116,6 @@ First Leg,20,22 novembre 2024,CHAMONIX - BORDEAUX,Regular Time,1-4,no,BORDEAUX
 First Leg,20,22 novembre 2024,GRENOBLE - ROUEN,Regular Time,6-3,no,GRENOBLE
 First Leg,20,22 novembre 2024,MARSEILLE - AMIENS,Extra Time,5-4,no,MARSEILLE
 First Leg,20,22 novembre 2024,ANGLET - ANGERS,Regular Time,0-6,no,ANGERS
-First Leg,20,22 novembre 2024,GAP - CERGY,,,yes,
 First Leg,21,24 novembre 2024,CERGY - CHAMONIX,Extra Time,3-4,no,CHAMONIX
 First Leg,21,24 novembre 2024,ROUEN - MARSEILLE,Regular Time,2-1,no,ROUEN
 First Leg,21,24 novembre 2024,ANGERS - AMIENS,Regular Time,5-0,no,ANGERS
@@ -189,6 +188,7 @@ Second Leg,32,3 janvier 2025,CERGY - BORDEAUX,,,yes,
 Second Leg,32,3 janvier 2025,ANGLET - ANGERS,,,yes,
 First Leg,9,5 janvier 2025,BRIANCON - CERGY,,,yes,
 Second Leg,25,5 janvier 2025,CHAMONIX - AMIENS,,,yes,
+First Leg,20,7 janvier 2025,GAP - CERGY,,,yes,
 Second Leg,33,10 janvier 2025,BORDEAUX - NICE,,,yes,
 Second Leg,33,10 janvier 2025,ROUEN - CERGY,,,yes,
 Second Leg,33,10 janvier 2025,GRENOBLE - CHAMONIX,,,yes,
@@ -253,10 +253,10 @@ Second Leg,42,14 février 2025,AMIENS - NICE,,,yes,
 Second Leg,42,14 février 2025,ANGERS - ANGLET,,,yes,
 Second Leg,43,18 février 2025,BRIANCON - AMIENS,,,yes,
 Second Leg,43,18 février 2025,CHAMONIX - GRENOBLE,,,yes,
-Second Leg,43,18 février 2025,CERGY - ROUEN,,,yes,
 Second Leg,43,18 février 2025,ANGLET - MARSEILLE,,,yes,
 Second Leg,43,19 février 2025,GAP - ANGERS,,,yes,
 Second Leg,43,19 février 2025,NICE - BORDEAUX,,,yes,
+Second Leg,43,19 février 2025,CERGY - ROUEN,,,yes,
 Second Leg,44,21 février 2025,ROUEN - NICE,,,yes,
 Second Leg,44,21 février 2025,MARSEILLE - GAP,,,yes,
 Second Leg,44,21 février 2025,BORDEAUX - BRIANCON,,,yes,
