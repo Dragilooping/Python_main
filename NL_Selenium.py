@@ -3,6 +3,7 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,10 +12,13 @@ from collections import defaultdict
 import csv
 
 web = "https://www.rts.ch/sport/resultats/#/results/hockey/nla/Phase-1-0"
-path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
-service = Service(executable_path=path)
+
 chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 def parsefrenchdate(datestr):
