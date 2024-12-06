@@ -8,11 +8,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
 
-web = "https://www.rts.ch/sport/resultats/#/results/hockey/nla/Phase-1-0/rankings/700217"
-path = r'C:\WebDrivers\chromedriver-win64\chromedriver.exe'
-service = Service(executable_path=path)
 chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
+
+web = "https://www.rts.ch/sport/resultats/#/results/hockey/nla/Phase-1-0/rankings/700217"
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 def accept_cookies(driver):
