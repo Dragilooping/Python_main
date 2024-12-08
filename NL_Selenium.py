@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import csv
+from datetime import datetime
 
 web = "https://www.rts.ch/sport/resultats/#/results/hockey/nla/Phase-1-0"
 driver = None
