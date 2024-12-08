@@ -133,7 +133,7 @@ try:
             }
 
             # Wait for the table to load
-            WebDriverWait(driver, 30).until(
+            WebDriverWait(driver, 60).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, ".stxt-results-table"))
             )
     
