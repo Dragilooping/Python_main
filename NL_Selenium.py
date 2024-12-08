@@ -9,6 +9,13 @@ import time
 import csv
 from datetime import datetime
 
+def replace_team_names(team_name):
+    replacements = {
+        "Genève": "Geneve",
+        # Add more replacements here if needed
+    }
+    return replacements.get(team_name, team_name)
+    
 web = "https://www.rts.ch/sport/resultats/#/results/hockey/nla/Phase-1-0"
 driver = None
 try:
@@ -197,9 +204,9 @@ try:
                     elif current_date:
                         if span_text in teams:
                             if "home_team" not in temp_match:
-                                temp_match["home_team"] = span_text
+                                temp_match["home_team"] = replace_team_names(span_text)
                             elif "away_team" not in temp_match:
-                                temp_match["away_team"] = span_text
+                                temp_match["away_team"] = replace_team_names(span_text)
                                 temp_match["date"] = current_date
                                 if temp_score:
                                     win_type = determine_win_type(temp_score)
@@ -215,7 +222,7 @@ try:
                                     "leg": leg,
                                     "journee": "",
                                     "date": format_french_date(parsefrenchdate(current_date)),
-                                    "match": f"{temp_match['home_team']} - {temp_match['away_team']}",
+                                    "match": f"{replace_team_names(temp_match['home_team'])} - {replace_team_names(temp_match['away_team'])}",
                                     "win_type": win_type,
                                     "score": temp_match["score"],
                                     "available": "yes" if temp_match["score"] == "No Score" else "no",
