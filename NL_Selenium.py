@@ -80,7 +80,7 @@ try:
                 driver.execute_script("arguments[0].click();", month_selector)
     
             print(f"Clicked on month: {month}")
-            time.sleep(2)
+            time.sleep(5)
         except Exception as e:
             print(f"Error selecting month {month}: {str(e)}")
     
@@ -143,6 +143,7 @@ try:
             matches_data = []
     
             for span_text in all_data:
+                print(f"Processing span text: {span_text}")
                 if span_text in [date.text for date in dates]:
                     current_date = span_text
                     temp_match = {}
