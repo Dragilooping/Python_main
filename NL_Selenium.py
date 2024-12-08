@@ -125,7 +125,7 @@ try:
                 "Zoug", "Bienne", "Langnau", "Fribourg", "Genève",
                 "Ambri", "Lugano", "Rapperswil", "Ajoie"
             }
-    
+
             # Wait for the table to load
             WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, ".stxt-results-table"))
