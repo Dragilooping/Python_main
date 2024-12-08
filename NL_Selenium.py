@@ -119,32 +119,72 @@ try:
     
     
     def scrape_month(driver):
-        try:
-            # print("Attempting to scrape month data...")
-            teams = {
-                "Davos", "Zurich", "Berne", "Lausanne", "Kloten",
-                "Zoug", "Bienne", "Langnau", "Fribourg", "Genève",
-                "Ambri", "Lugano", "Rapperswil", "Ajoie"
-            }
-    
-            dates = WebDriverWait(driver, 20).until(
-                EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".stxt-results-table__date-inner"))
-            )
-            # print(f"Found {len(dates)} dates")
-    
+    try:
+        teams = {
+            "Davos", "Zurich", "Berne", "Lausanne", "Kloten",
+            "Zoug", "Bienne", "Langnau", "Fribourg", "Genève",
+            "Ambri", "Lugano", "Rapperswil", "Ajoie"
+        }
+
+        # Wait for the table to load
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".stxt-results-table"))
+        )
+
+        # Try to extract data using JavaScript
+        js_data = driver.execute_script("""
+            var data = [];
+            var rows = document.querySelectorAll('.stxt-results-table__row');
+            rows.forEach(function(row) {
+                var date = row.querySelector('.stxt-results-table__date-inner')?.textContent.trim();
+                var teams = row.querySelectorAll('.stxt-results-table__team-name');
+                var score = row.querySelector('.stxt-results-table__score')?.textContent.trim();
+                if (date && teams.length === 2 && score) {
+                    data.push({
+                        date: date,
+                        home: teams[0].textContent.trim(),
+                        away: teams[1].textContent.trim(),
+                        score: score
+                    });
+                }
+            });
+            return data;
+        """)
+
+        print("JavaScript extracted data:", js_data)
+
+        matches_data = []
+
+        if js_data:
+            # Process the JavaScript extracted data
+            for match in js_data:
+                win_type = determine_win_type(match['score'])
+                cleaned_score = clean_score(match['score'])
+                winner = determine_winner(match['home'], match['away'], cleaned_score)
+
+                match_data = {
+                    "leg": "First Leg" if parsefrenchdate(match['date']) < datetime(2024, 12, 4) else "Second Leg",
+                    "journee": "",
+                    "date": format_french_date(parsefrenchdate(match['date'])),
+                    "match": f"{match['home']} - {match['away']}",
+                    "win_type": win_type,
+                    "score": cleaned_score,
+                    "available": "yes" if cleaned_score == "No Score" else "no",
+                    "winner": winner
+                }
+                matches_data.append(match_data)
+        else:
+            print("JavaScript extraction failed. Trying original method.")
             span_elements = driver.find_elements(By.XPATH, "//span")
-            # print(f"Found {len(span_elements)} span elements")
-    
             all_data = [span.text.strip() for span in span_elements]
-    
+            
             current_date = None
             temp_match = {}
             temp_score = None
-            matches_data = []
-    
+
             for span_text in all_data:
                 print(f"Processing span text: {span_text}")
-                if span_text in [date.text for date in dates]:
+                if span_text in [date.text for date in driver.find_elements(By.CSS_SELECTOR, ".stxt-results-table__date-inner")]:
                     current_date = span_text
                     temp_match = {}
                     temp_score = None
@@ -156,15 +196,15 @@ try:
                             temp_match["away_team"] = span_text
                             temp_match["date"] = current_date
                             if temp_score:
-                                win_type = determine_win_type(temp_score)  # Determine win type before cleaning
+                                win_type = determine_win_type(temp_score)
                                 temp_match["score"] = clean_score(temp_score)
                             else:
                                 temp_match["score"] = "No Score"
                                 win_type = "Regular Time"
-    
+
                             leg = "First Leg" if parsefrenchdate(current_date) < datetime(2024, 12, 4) else "Second Leg"
                             winner = determine_winner(temp_match["home_team"], temp_match["away_team"], temp_match["score"])
-    
+
                             match_data = {
                                 "leg": leg,
                                 "journee": "",
@@ -180,12 +220,14 @@ try:
                             temp_score = None
                     elif " - " in span_text:
                         temp_score = span_text
-    
-            return matches_data
-    
-        except Exception as e:
-            print(f"Error scraping month: {str(e)}")
-            return []
+
+        return matches_data
+
+    except Exception as e:
+        print(f"Error scraping month: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
+        return []
     
     def write_matches_to_csv(matches_data, filename):
         with open(filename, 'w', newline='') as csvfile:
