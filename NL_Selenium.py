@@ -213,5 +213,9 @@ try:
         print("No data collected for any month")
     
     print("Scraping process completed")
-    driver.quit()
+except Exception as e:
+    print(f"An error occurred: {str(e)}")
 
+finally:
+    if driver:
+        driver.quit()
