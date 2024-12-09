@@ -1,0 +1,19 @@
+name: Delete Past Workflow Runs
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly at midnight on Sunday
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  delete_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api --paginate "/repos/$REPO/actions/runs" \
+          | jq -r '.workflow_runs[] | select(.status == "completed") | .id' \
+          | xargs -I{} gh api -X DELETE "/repos/$REPO/actions/runs/{}"
