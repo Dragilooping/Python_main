@@ -2,7 +2,6 @@ import json
 from datetime import datetime, date
 import csv
 
-from dateutil.parser import parse
 from kivy.storage.jsonstore import JsonStore
 import requests
 from io import StringIO
