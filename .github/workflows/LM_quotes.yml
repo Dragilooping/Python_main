@@ -1,0 +1,29 @@
+
+name: Run LigueMagnus QuotesScript
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every 6 hours
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  run-matches-script:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium webdriver_manager babel
+    - name: Run LM quotes script
+      run: python ligue_magnus_quotes.py
+    - name: Commit and push if changes
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add quotes_LM.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update matches CSV file" && git push)
